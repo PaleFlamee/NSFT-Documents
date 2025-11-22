@@ -1,0 +1,16 @@
+#define Pot A0
+#define LED 3
+
+int PotBuffer = 0;
+
+void setup()
+{
+  pinMode(LED,OUTPUT);
+}
+
+void loop()
+{
+  PotBuffer = analogRead(Pot);
+  PotBuffer = map(PotBuffer, 0, 1023, 0, 255);
+  analogWrite(LED,PotBuffer);
+}

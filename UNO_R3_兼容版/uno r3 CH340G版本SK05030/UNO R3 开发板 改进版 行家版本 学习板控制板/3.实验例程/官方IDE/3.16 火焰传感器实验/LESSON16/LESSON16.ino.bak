@@ -1,0 +1,26 @@
+#define ADpin A0
+#define Buzzer 2
+int ADBuffer = 0;
+
+void setup()
+{
+  pinMode(Buzzer,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  ADBuffer = analogRead(ADpin);
+  Serial.print("AD = ");
+  Serial.println(ADBuffer);
+  
+  if(ADBuffer > 20)
+  {
+    digitalWrite(Buzzer,HIGH);
+  }
+  else
+  {
+    digitalWrite(Buzzer,LOW);
+  }
+  delay(500);
+}

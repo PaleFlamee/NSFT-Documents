@@ -1,0 +1,65 @@
+#define KEY1 2
+#define KEY2 3
+
+int Flag_up = 0;
+
+void setup() 
+{
+  pinMode(KEY1, INPUT_PULLUP);
+  pinMode(KEY2, INPUT_PULLUP);
+  Keyboard.begin();
+}
+ 
+void loop() 
+{
+  if( ScanKey(1) == 1)
+  {
+    Keyboard.press(KEY_LEFT_ARROW);
+    delay(50);
+    Keyboard.releaseAll();
+  }
+  else if(ScanKey(1) == 2)
+  {
+    Keyboard.press(KEY_RIGHT_ARROW);
+    delay(50);
+    Keyboard.releaseAll();
+  }
+}
+
+unsigned char ScanKey(int mode)			//按键扫描程序，返回键值
+{
+  if(mode)
+  {
+    Flag_up = 1;
+  }
+  else
+  {
+    Flag_up = 0;
+  }
+  if(Flag_up  && (digitalRead(KEY1) == LOW || digitalRead(KEY2) == LOW) )		//当Flag_up = 1并且按键按下时
+  {
+    Flag_up = 0;										//清空Flag_up
+    delay(10);											//延时去抖动
+    if(digitalRead(KEY1) == LOW)			//按键按下
+    {
+      return 1;											//返回键值1
+    }
+    if(digitalRead(KEY2) == LOW)			//按键按下
+    {
+      return 2;											//返回键值1
+    }
+  }
+  if(digitalRead(KEY1) == HIGH && digitalRead(KEY2) == HIGH)			//按键松开时候
+  {
+    Flag_up = 1;										//置位Flag_up
+  }
+  return 0;													//返回键值0
+}
+
+
+
+
+
+
+
+

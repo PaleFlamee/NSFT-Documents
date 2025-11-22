@@ -1,0 +1,25 @@
+#define Pot A0
+#define Buzzer 2
+
+int PotBuffer = 0;
+
+void setup()
+{
+  pinMode(Buzzer,OUTPUT);
+}
+
+void loop()
+{
+  PotBuffer = analogRead(Pot);
+  
+  for(int i = 0 ; i < 100 ; i++)
+  {
+    digitalWrite(Buzzer,HIGH);
+    delayMicroseconds(PotBuffer);
+    digitalWrite(Buzzer,LOW);
+    delayMicroseconds(100);
+  }
+
+  
+  delay(1000);
+}

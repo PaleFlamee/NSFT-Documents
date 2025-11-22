@@ -1,0 +1,26 @@
+#define ADpin A5
+#define LED 13
+
+int ADBuffer = 0;
+
+void setup()
+{
+  pinMode(LED,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  ADBuffer = analogRead(ADpin);
+  Serial.print("AD = ");
+  Serial.println(ADBuffer);
+  if(ADBuffer > 800)
+  {
+    digitalWrite(LED,HIGH);
+  }
+  else
+  {
+    digitalWrite(LED,LOW);
+  }
+  delay(500);
+}
